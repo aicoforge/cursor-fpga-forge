@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "tasks": [
+    {
+      "label": "HLS: csim+csynth",
+      "type": "shell",
+      "command": "./vitis_env.sh vitis_hls -f run_hls.tcl",
+      "options": { 
+        "cwd": "${workspaceFolder}", 
+        "shell": { "executable": "/bin/bash", "args": ["-c"] } 
+      },
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    }
+  ]
+}
