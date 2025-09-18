@@ -33,7 +33,7 @@ This framework supports both traditional FPGA design/verification workflows and 
 
 ## Quick Start
 
-**Demo Video**: [Watch completed cursor+FPGA verification demo](https://www.youtube.com/watch?v=X6GnP7EcbZw) - See the complete workflow in action, or follow the step-by-step guide below.  
+**Demo Video**: [Watch completed cursor+FPGA verification demo](https://www.dropbox.com/scl/fi/rkxtn9wob6r95txqem8ad/cursor-fpga-forge.mp4?rlkey=cp51390450l7maxgzia7hf7ko&dl=0) - See the complete workflow in action, or follow the step-by-step guide below.  
 **Execution Log**: [View full synthesis & verification log](https://www.dropbox.com/scl/fi/2zua9qlv7qj0nrdeg7fwz/demo.log?rlkey=wbat8307916fzze0437lvcvtt&e=1&dl=0) - Includes csim, csynth, and U50 hardware verification details.
 
 ### 1. Prerequisites
