@@ -15,6 +15,8 @@ This framework supports both traditional FPGA design/verification workflows and 
 
 **This Project Focus**: We demonstrate our AI Agent + FPGA Automated Directive concept using **Cursor** (an AI-powered code editor) as the AI agent and **Xilinx U50** as the FPGA platform, specifically showcasing HLS workflow automation. Cursor represents the class of AI agents with capabilities similar to other market solutions like GitHub Copilot, Tabnine, or CodeWhisperer - we chose Cursor for this demonstration due to its comprehensive AI integration and development workflow capabilities.
 
+**Development Strategy**: This project establishes the foundational framework for AI-FPGA automation by demonstrating automated verification environment generation. Based on this proven foundation, we are extending capabilities to include intelligent error diagnosis and repair, performance optimization recommendations, interactive debugging assistance, and adaptive platform configuration - transforming the current example from template execution into true intelligent assistance.
+
 ## What This Does
 
 **Problem:** FPGA development has a massive gap. Engineers spend weeks setting up verification environments, debugging HLS settings, fixing memory allocation issues, and dealing with hard-to-understand error messages.
@@ -23,13 +25,17 @@ This framework supports both traditional FPGA design/verification workflows and 
 
 **Result:** From design idea to running verification environment in minutes. From time-consuming setup to automated, error-free workflows.
 
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/681c07cc-6a0a-415c-b284-3e9783bc0eff" width="60%">
+</div>
+
 ## What It Delivers
 
 - **Instant Environment Setup**: AI generates complete verification frameworks in seconds (not weeks of manual config)
 - **Smart Error Prevention**: Correct HLS pragma placement, memory interface setup, build configurations
 - **Intelligent Fallback**: Multi-tier memory allocation handles different FPGA setups automatically
 - **No More Debug Hard Work**: Filters out noise, shows you what actually matters
-- **Universal Adaptation**: Works across Vitis versions and FPGA platforms with simple config changes
+- **Universal Adaptation**: Works across toolkit versions and FPGA platforms with simple config changes
 
 ## Quick Start
 
@@ -53,13 +59,13 @@ First, connect to your FPGA development server using Cursor's SSH feature:
 
 ```bash
 # In Cursor IDE:
-# 1. Press Ctrl+Shift+P
-# 2. Type "Remote-SSH: Connect to Host"
-# 3. Configure your SSH connection
-# 4. Connect to your FPGA server
+1. Press Ctrl+Shift+P
+2. Type "Remote-SSH: Connect to Host"
+3. Configure your SSH connection
+4. Connect to your FPGA server
 ```
 
-For detailed SSH setup with Cursor, ask the SSH connection guide in the [cursor doc website](https://docs.cursor.com/en/welcome).
+For detailed SSH setup with Cursor, find the SSH connection guide in the [cursor doc website](https://docs.cursor.com/en/welcome).
 
 #### 2.2 Initial Project Structure & HLS Verification
 After cloning, your project directory should look like this:
@@ -75,7 +81,7 @@ cursor-fpga-forge/
     └── tasks.json            # Build task configuration
 ```
 
-First, enable execution and test the basic HLS flow:
+First, enable execution and test the basic HLS csim+csynth flow:
 ```bash
 # Make environment script executable
 chmod +x vitis_env.sh
@@ -85,19 +91,20 @@ chmod +x vitis_env.sh
 # This will execute: ./vitis_env.sh vitis_hls -f run_hls.tcl
 ```
 
-#### 2.3 Generate Verification Scripts
+#### 2.3 Generate FPGA Verification Scripts
 **This is the key step**: Use Cursor AI with the specification document to generate automation scripts:
 
 ```bash
-# 1. Open this project directory in Cursor
-# 2. Give this prompt to Cursor AI:
+# In Cursor IDE:
+1. Open this project directory in Cursor
+2. Give this prompt to Cursor AI:
 
 "please follow fpga_verification.md to build fpga verification needed scripts"
 
-# 3. Cursor will generate the complete verification framework:
-#    - setup_verification.sh (environment setup)
-#    - run_verification.sh (verification execution)
-#    - fpga_verification/ directory with all source files and Makefiles
+3. Cursor will generate the complete verification framework:
+- setup_verification.sh (environment setup)
+- run_verification.sh (verification execution)
+- fpga_verification/ directory with all source files and Makefiles
 ```
 
 #### 2.4 Run Setup
@@ -107,19 +114,19 @@ chmod +x setup_verification.sh run_verification.sh
 ./setup_verification.sh
 
 # This will create the complete fpga_verification/ directory structure:
-# fpga_verification/
-# ├── src/
-# │   ├── adder_kernel.cpp       # Kernel with HLS pragmas INSIDE function body
-# │   ├── adder_kernel.h         # Kernel header file
-# │   └── host.cpp               # Host program with multi-tier memory allocation
-# ├── kernels/Hardware/
-# │   ├── Makefile               # Kernel compilation Makefile
-# │   └── adder-compile.cfg      # Kernel compilation configuration
-# ├── system_hw_link/Hardware/
-# │   └── Makefile               # System linking Makefile
-# ├── host/build/
-# │   └── Makefile               # Host compilation Makefile
-# └── vitis_env.sh               # Environment setup script
+fpga_verification/
+├── src/
+│   ├── adder_kernel.cpp       # Kernel with HLS pragmas INSIDE function body
+│   ├── adder_kernel.h         # Kernel header file
+│   └── host.cpp               # Host program with multi-tier memory allocation
+├── kernels/Hardware/
+│   ├── Makefile               # Kernel compilation Makefile
+│   └── adder-compile.cfg      # Kernel compilation configuration
+├── system_hw_link/Hardware/
+│   └── Makefile               # System linking Makefile
+├── host/build/
+│   └── Makefile               # Host compilation Makefile
+└── vitis_env.sh               # Environment setup script
 ```
 
 #### 2.5 Verify Setup
@@ -149,7 +156,7 @@ tree fpga_verification
 - **Environment Setup**: Complete verification framework generation
 - **Configuration**: Build files, HLS settings, memory setup - no more trial and error
 - **Error Recovery**: Smart fallbacks when things fail, no manual debugging
-- **Platform Adaptation**: Switch between FPGA platforms and Vitis versions instantly
+- **Platform Adaptation**: Switch between FPGA platforms and toolkit versions instantly
 
 ### What Still Takes Time (Physics):
 - **Kernel Compilation**: ~1-2 minutes (HLS synthesis)
@@ -184,9 +191,18 @@ Your adder kernel is now verified on real FPGA hardware with detailed timing and
 
 ## Environment Customization
 
+You can customize the environment in two ways: 
+1. **Before generation**: Modify the template specifications in `fpga_verification.md` before asking Cursor AI to generate scripts
+2. **After generation**: Edit the generated scripts directly
+
 ### Different Vitis Version?
-Edit these files:
 ```bash
+# Option 1: Edit fpga_verification.md before generation
+# Find Section 1 and change:
+VITIS_VERSION="2023.2"  # Change from 2022.1
+VITIS_PATH="/opt/Xilinx/Vitis/${VITIS_VERSION}"
+
+# Option 2: Edit generated files after creation
 # In setup_verification.sh and vitis_env.sh
 VITIS_VERSION="2023.2"  # Change from 2022.1
 VITIS_PATH="/opt/Xilinx/Vitis/2023.2"
@@ -194,16 +210,28 @@ VITIS_PATH="/opt/Xilinx/Vitis/2023.2"
 
 ### Different FPGA Platform?
 ```bash
-# Set before running
+# Option 1: Edit fpga_verification.md specification 
+# Find Section 1 and change:
+DEFAULT_PLATFORM="xilinx_u250_gen3x16_xdma_4_1_202210_1"
+
+# Option 2: Set environment variable before running
 export FPGA_PLATFORM="xilinx_u250_gen3x16_xdma_4_1_202210_1"
 ./setup_verification.sh
 ```
 
 ### Different Installation Paths?
 ```bash
-# Customize in setup_verification.sh
-XRT_PATH="/your/xrt/path"
-VITIS_PATH="/your/vitis/path"
+# Option 1: Modify paths in fpga_verification.md Section 1
+XRT_PATH="/opt/xilinx/xrt"                    # Change to your XRT path
+VITIS_PATH="/opt/Xilinx/Vitis/2022.1"         # Change to your Vitis path
+
+# Common alternative paths:
+XRT_PATH="/tools/Xilinx/xrt"                  # Alternative XRT location
+VITIS_PATH="/tools/Xilinx/Vitis/2023.1"       # Different version/location
+
+# Option 2: Customize in generated setup_verification.sh
+XRT_PATH="/home/user/xilinx/xrt"              # Custom user installation
+VITIS_PATH="/home/user/xilinx/Vitis/2022.2"   # Custom user installation
 ```
 
 ## Vision & Future
