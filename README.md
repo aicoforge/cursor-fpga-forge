@@ -1,41 +1,50 @@
 # cursor-fpga-forge
 
-> **AI Agent + FPGA Automated Directive**
-> Transform months of FPGA verification work into minutes using AI-assisted automation
+> **AI Agent + FPGA Auto Design & Verification**
+> Turn months of FPGA development work into minutes or hours with AI-powered automation
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/Platform-Xilinx%20U50-blue.svg)](https://www.xilinx.com/)
 [![Vitis](https://img.shields.io/badge/Vitis-2022.1-green.svg)](https://www.xilinx.com/products/design-tools/vitis.html)
 
-## Project Background
+## About This Project
 
-**AI Agent + FPGA Automated Directive** represents the next evolution in FPGA development automation. Our approach leverages intelligent AI agents to provide comprehensive automated guidance throughout the FPGA design and verification lifecycle.
+**This is AICOFORGE's first open-source project!** We're building the future of FPGA development by making it as fast and easy as software development.
 
-This framework supports both traditional FPGA design/verification workflows and high-level synthesis (HLS) workflows. While traditional FPGA flows benefit from automation, HLS workflows particularly require AI assistance due to their specialized syntax, pragma directives, and optimization techniques that present significant professional barriers.
+**Our Vision**: AI Agent + FPGA Auto Design & Verification - intelligent AI agents that guide you through the complete FPGA design and verification lifecycle, from initial concept to running hardware.
 
-**This Project Focus**: We demonstrate our AI Agent + FPGA Automated Directive concept using **Cursor** (an AI-powered code editor) as the AI agent and **Xilinx U50** as the FPGA platform, specifically showcasing HLS workflow automation. Cursor represents the class of AI agents with capabilities similar to other market solutions like GitHub Copilot, Tabnine, or CodeWhisperer - we chose Cursor for this demonstration due to its comprehensive AI integration and development workflow capabilities.
+**What This Project Delivers**: We're starting with an **automated verification template** that demonstrates our approach. This foundation showcases how AI can eliminate weeks of manual setup and configuration. Based on this proven template, we're extending capabilities to cover the full design and verification lifecycle including intelligent error diagnosis, performance optimization, and interactive debugging assistance.
 
-**Development Strategy**: This project establishes the foundational framework for AI-FPGA automation by demonstrating automated verification environment generation. Based on this proven foundation, we are extending capabilities to include intelligent error diagnosis and repair, performance optimization recommendations, interactive debugging assistance, and adaptive platform configuration - transforming the current example from template execution into true intelligent assistance.
+**Technology Stack**: This demonstration uses **Cursor** (AI-powered code editor) as the AI agent and **Xilinx U50** as the FPGA platform, specifically showcasing HLS workflow automation. We chose Cursor for its comprehensive AI integration, but our approach works with similar AI assistants like GitHub Copilot, Tabnine, or CodeWhisperer.
 
-## What This Does
+## The Problem We Solve
 
-**Problem:** FPGA development has a massive gap. Engineers spend weeks setting up verification environments, debugging HLS settings, fixing memory allocation issues, and dealing with hard-to-understand error messages.
+**Pain Points**: FPGA development has huge efficiency gaps. Engineers spend weeks setting up verification environments, debugging HLS configs, fixing memory issues, and dealing with confusing error messages. About 70% of development time goes to setup and debugging instead of innovation.
 
-**Solution:** AI Agent + FPGA Automated Directive automatically generates correct verification frameworks, handles error-prone configurations, and provides smart fallback strategies. The FPGA synthesis, place and route still take the same time (that's physics), but everything else becomes instant.
+**Our Solution**: AI Agent + FPGA automation creates correct design and verification frameworks, handles tricky configs, and provides smart fallback strategies. FPGA synthesis and place-and-route still take the same time (that's physics), but everything else becomes instant.
 
-**Result:** From design idea to running verification environment in minutes. From time-consuming setup to automated, error-free workflows.
+**Results**: Go from design idea to running verification in minutes or hours. Turn time-consuming setup into automated, error-free workflows.
 
 <div align="center">
     <img src="https://github.com/user-attachments/assets/681c07cc-6a0a-415c-b284-3e9783bc0eff" width="60%">
 </div>
 
-## What It Delivers
+## Key Features
 
-- **Instant Environment Setup**: AI generates complete verification frameworks in seconds (not weeks of manual config)
-- **Smart Error Prevention**: Correct HLS pragma placement, memory interface setup, build configurations
-- **Intelligent Fallback**: Multi-tier memory allocation handles different FPGA setups automatically
-- **No More Debug Hard Work**: Filters out noise, shows you what actually matters
-- **Universal Adaptation**: Works across toolkit versions and FPGA platforms with simple config changes
+- **Instant Environment Setup**: AI generates complete verification frameworks in seconds (instead of weeks of manual config)
+- **Smart Configuration**: Correct HLS pragma placement, memory interface settings, and build configurations
+- **Automated Memory Access**: Multi-tier memory allocation automatically handles different FPGA setups
+- **Intelligent Error Handling**: Filters noise and shows what actually matters
+- **Universal Adaptation**: Works across tool versions and FPGA platforms with simple config changes
+
+## Use Cases
+
+Our technology is perfect for applications that need ultra-low latency and high throughput:
+
+- **High-Frequency Trading**: Microsecond-level trading decisions and execution using FPGA hardware acceleration
+- **Implied Volatility Calculation**: FPGA-powered microsecond implied volatility calculations for options trading
+- **Real-Time Signal Processing**: Digital signal processing, image processing, radar signal analysis
+- **Neural Network Inference**: Lower latency and better power efficiency than GPUs for edge computing
 
 ## Quick Start
 
@@ -150,23 +159,24 @@ tree fpga_verification
 ./run_verification.sh sw
 ```
 
-## Execution Summary
+## What AI Speeds Up vs. What Takes Time
 
-### What AI Speeds Up (Minutes):
+### What AI Automates (Minutes):
 - **Environment Setup**: Complete verification framework generation
 - **Configuration**: Build files, HLS settings, memory setup - no more trial and error
 - **Error Recovery**: Smart fallbacks when things fail, no manual debugging
 - **Platform Adaptation**: Switch between FPGA platforms and toolkit versions instantly
 
-### What Still Takes Time (Physics):
+### What's Still Physics (Hours):
 - **Kernel Compilation**: ~1-2 minutes (HLS synthesis)
 - **Bitstream Generation**: ~2 hours (place & route can't be rushed)
 - **Hardware Testing**: ~5 seconds (actual FPGA execution)
 
-Instead of spending **weeks** setting up environments, debugging configs, and fixing pragma errors, you spend **minutes** generating working frameworks and **hours** on actual FPGA compilation. The tedious, error-prone human work disappears.
+**The Impact**: Instead of spending **weeks** on setup, debugging configs, and fixing pragma errors, you spend **minutes** generating working frameworks and **hours** on actual FPGA compilation. The tedious, error-prone human work disappears.
 
-### Verification Phase
-Complete FPGA flow with real timing data:
+### Complete Verification Results
+
+Real FPGA flow with actual timing data:
 
 1. **Kernel Compilation** (~1-2 minutes)
    - HLS synthesis with pragma optimization
@@ -186,8 +196,6 @@ Complete FPGA flow with real timing data:
    - Real FPGA execution on U50
    - **Memory allocation**: Falls back to HBM Bank 0
    - **Test Cases**: 4 different scenarios ✓ ALL PASSED
-
-Your adder kernel is now verified on real FPGA hardware with detailed timing and resource reports.
 
 ## Environment Customization
 
@@ -234,44 +242,86 @@ XRT_PATH="/home/user/xilinx/xrt"              # Custom user installation
 VITIS_PATH="/home/user/xilinx/Vitis/2022.2"   # Custom user installation
 ```
 
-## Vision & Future
+## Technology Stack
 
-This is just the beginning. We're building towards:
+**AI Tools**:
+- Cursor IDE (AI code editor) or similar AI assistants
+- Public LLMs like OpenAI and Claude
+- Private LLM services (for enterprise security needs)
+- Automated error diagnosis and fixes
 
-- **Multi-kernel Orchestration**: Complex FPGA systems with AI-generated interconnects
-- **Waveform AI Debugging**: AI analyzes simulation traces and suggests fixes
-- **Performance Optimization**: AI recommends HLS pragma optimizations automatically
-- **Cross-Platform Generation**: Support for Intel FPGAs, different vendors
+**FPGA Platform**:
+- Xilinx Alveo U50/U250/U280 and AIE series
+- Vitis HLS 2022.1+
+- Custom FPGA platform support
+- Cross-platform compatibility
+
+## Roadmap & Future Development
+
+Based on this automated verification foundation, we're building towards comprehensive design and verification automation:
+
+**Near-term Extensions**:
+- **Intelligent Error Diagnosis**: AI analyzes error messages and suggests fixes automatically
+- **Performance Optimization**: AI recommends HLS pragma optimizations and resource allocation
+- **Interactive Debugging**: AI-assisted waveform analysis and debugging guidance
+- **Design Template Generation**: AI creates optimized design structures from specifications
+
+**Long-term Vision**:
+- **Multi-kernel System Design**: Complex FPGA systems with AI-generated interconnects
+- **Advanced Waveform Analysis**: AI analyzes simulation traces and identifies issues
+- **Cross-Platform Generation**: Support for Intel FPGAs, different vendors, and custom boards
 - **Real-time Collaboration**: Team-based FPGA development with AI assistance
+- **Full Lifecycle Automation**: From concept to optimized, verified hardware implementation
 
 ## Why This Matters
 
-Most FPGA engineers spend about 70% of their time on verification and debugging instead of real innovation. Our mission is to make FPGA development as fast and easy as software, with AI handling the boring parts so engineers can focus on breakthroughs. The result is faster time-to-market, lower barriers to using FPGAs, and more innovation in hardware acceleration.
+Most FPGA engineers spend about 70% of their time on verification and debugging instead of real innovation. Our mission is to make FPGA development as fast and easy as software development, with AI handling the tedious work so engineers can focus on breakthroughs. The result:
+
+- **Faster Time-to-Market**: Reduce development cycles from months to weeks
+- **Lower Barriers**: Make FPGA technology accessible to more developers
+- **More Innovation**: Free engineers to focus on solving real problems
+- **Better Quality**: Automated frameworks reduce human error
 
 ## Contributing & Services
 
-We offer **AI Agent + Automated FPGA Verification services** through [aicoforge](https://aicoforge.com), where clients can choose different AI agents and FPGA platforms based on their specific requirements. This project demonstrates our capabilities using Cursor and Xilinx U50 as an example implementation.
+### Commercial Services
 
-For enterprise clients with specific security, compliance, or customization needs, we can assist in deploying private, local, or customized LLM services to provide tailored AI agent solutions that meet your organizational requirements.
+We offer **AI Agent + FPGA Auto Design & Verification services** through [aicoforge.com](https://aicoforge.com), where clients can choose different AI agents and FPGA platforms based on their specific requirements. This GitHub project demonstrates our capabilities using Cursor and Xilinx U50 as an example implementation.
 
-Our commercial services include:
-- Multi-kernel system verification
-- Custom IP integration and testing  
+**Our Services Include**:
+- Multi-core system verification
+- Custom IP integration and testing
 - Performance optimization and debugging
-- Platform-specific adaptation (Intel FPGAs, custom boards)
+- Platform-specific adaptation (Intel FPGA, custom boards)
 - Enterprise deployment and training
+- Private LLM deployment (for security and compliance needs)
 
-For commercial projects, contact us through [aicoforge](https://aicoforge.com).
+For commercial projects, contact us through [aicoforge.com](https://aicoforge.com).
 
 ### Open Source Contributions
-This is our initial open-source project as we build aicoforge! We welcome:
+
+**This is our first open-source project as we build AICOFORGE!** We welcome:
 - Bug reports and feature requests
 - Platform support (Intel FPGAs, different boards)
-- Integration with other tools
+- Integration with other AI tools and workflows
 - Documentation improvements
+- Sharing your success stories
+
+Join us in making FPGA development accessible to everyone!
 
 ## Connect With Us
 
-- **Startup:** [aicoforge](https://aicoforge.com) - Building the future of FPGA development
-- **Vision:** AI Agent + FPGA Automated Directive technology - AI that understands hardware
-- **Mission:** Turning FPGA complexity into simplicity, one automated verification at a time
+- **Website**: [aicoforge.com](https://aicoforge.com) - Building the future of FPGA development
+- **Vision**: AI Agent + FPGA Auto Design & Verification - AI that understands hardware
+- **Mission**: Turning FPGA complexity into simplicity, one automated workflow at a time
+- **Contact**: kevinjan@aicoforge.com
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+Built with the AICOFORGE team. As a Xilinx certified partner, we're dedicated to pushing the boundaries of FPGA development and making it accessible to all engineers.
