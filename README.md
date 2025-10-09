@@ -48,7 +48,7 @@ Our technology is perfect for applications that need ultra-low latency and high 
 
 ## Quick Start
 
-**Demo Video**: [Watch completed cursor+FPGA verification demo](https://www.youtube.com/watch?v=u_RUluOvOeM) - See the complete workflow in action, or follow the step-by-step guide below.  
+**Demo Video**: [Watch cursor + FPGA verification demo](https://www.youtube.com/watch?v=u_RUluOvOeM) - See the complete workflow in action, or follow the step-by-step guide below.  
 **Execution Log**: [View full synthesis & verification log](https://www.dropbox.com/scl/fi/2zua9qlv7qj0nrdeg7fwz/demo.log?rlkey=wbat8307916fzze0437lvcvtt&e=1&dl=0) - Includes csim, csynth, and U50 hardware verification details.
 
 ### 1. Prerequisites
