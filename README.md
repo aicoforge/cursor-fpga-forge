@@ -1,327 +1,284 @@
-# cursor-fpga-forge
+[English](./README_EN.md) | **繁體中文**
 
-> **AI Agent + FPGA Auto Design & Verification**
-> Turn months of FPGA development work into minutes or hours with AI-powered automation
+# Cursor-FPGA-Forge
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Platform](https://img.shields.io/badge/Platform-Xilinx%20U50-blue.svg)](https://www.xilinx.com/)
-[![Vitis](https://img.shields.io/badge/Vitis-2022.1-green.svg)](https://www.xilinx.com/products/design-tools/vitis.html)
+## AI 代理驅動的 FPGA 自動驗證平台
 
-## About This Project
+> 將數週的環境設置與驗證工作縮短至數分鐘
 
-**This is AICOFORGE's first open-source project!** We're building the future of FPGA development by making it as fast and easy as software development.
+---
 
-**Our Vision**: AI Agent + FPGA Auto Design & Verification - intelligent AI agents that guide you through the complete FPGA design and verification lifecycle, from initial concept to running hardware.
+## 專案簡介
 
-**What This Project Delivers**: We're starting with an **automated verification template** that demonstrates our approach. This foundation showcases how AI can eliminate weeks of manual setup and configuration. Based on this proven template, we're extending capabilities to cover the full design and verification lifecycle including intelligent error diagnosis, performance optimization, and interactive debugging assistance.
+**Cursor-FPGA-Forge** 是 AICOFORGE 平台的 FPGA 自動驗證範例，展示如何透過 AI 代理（Cursor IDE）自動產生完整的 FPGA 驗證環境，包含設計合成、bitstream 產生、主機端測試程式，並完成硬體驗證。
 
-**Technology Stack**: This demonstration uses **Cursor** (AI-powered code editor) as the AI agent and **Xilinx U50** as the FPGA platform, specifically showcasing HLS workflow automation. We chose Cursor for its comprehensive AI integration, but our approach works with similar AI assistants like GitHub Copilot, Tabnine, or CodeWhisperer.
+### 核心價值
 
-## The Problem We Solve
+| 指標 | 成果 |
+|:---:|:---:|
+| **數分鐘** | 自動產生完整驗證環境（傳統需數週） |
+| **2 小時** | 完整 FPGA 流程示範影片 |
+| **零錯誤** | AI 自動處理設定檔與記憶體配置 |
+| **隨插即用** | 適用不同 FPGA 平台與工具版本 |
 
-**Pain Points**: FPGA development has huge efficiency gaps. Engineers spend weeks setting up verification environments, debugging HLS configs, fixing memory issues, and dealing with confusing error messages. About 70% of development time goes to setup and debugging instead of innovation.
+---
 
-**Our Solution**: AI Agent + FPGA automation creates correct design and verification frameworks, handles tricky configs, and provides smart fallback strategies. FPGA synthesis and place-and-route still take the same time (that's physics), but everything else becomes instant.
+## 快速入門
 
-**Results**: Go from design idea to running verification in minutes or hours. Turn time-consuming setup into automated, error-free workflows.
+本專案提供一個**預先設計的 FPGA 驗證樣板**，讓你可以透過 AI 代理快速驗證自己的 FPGA 電路設計。這裡以簡單的 `adder` 加法器為範例，展示完整的自動化流程。你可以根據實際需求調整工具版本、FPGA 平台等設定。
 
-<div align="center">
-    <img src="https://github.com/user-attachments/assets/681c07cc-6a0a-415c-b284-3e9783bc0eff" width="60%">
-</div>
+### 展示影片與操作流程
 
-## Key Features
+#### Demo：完整 AI 自動化 FPGA 驗證流程
 
-- **Instant Environment Setup**: AI generates complete verification frameworks in seconds (instead of weeks of manual config)
-- **Smart Configuration**: Correct HLS pragma placement, memory interface settings, and build configurations
-- **Automated Memory Access**: Multi-tier memory allocation automatically handles different FPGA setups
-- **Intelligent Error Handling**: Filters noise and shows what actually matters
-- **Universal Adaptation**: Works across tool versions and FPGA platforms with simple config changes
+**影片連結**：[Watch cursor + FPGA verification demo](https://www.youtube.com/watch?v=u_RUluOvOeM)（2 小時完整過程）
 
-## Use Cases
+**執行日誌**：[View full synthesis & verification log](https://www.dropbox.com/scl/fi/2zua9qlv7qj0nrdeg7fwz/demo.log?rlkey=wbat8307916fzze0437lvcvtt&e=1&dl=0)
 
-Our technology is perfect for applications that need ultra-low latency and high throughput:
+#### 影片內容說明
 
-- **High-Frequency Trading**: Microsecond-level trading decisions and execution using FPGA hardware acceleration
-- **Implied Volatility Calculation**: FPGA-powered microsecond implied volatility calculations for options trading
-- **Real-Time Signal Processing**: Digital signal processing, image processing, radar signal analysis
-- **Neural Network Inference**: Lower latency and better power efficiency than GPUs for edge computing
+此影片展示 Cursor AI 如何自動完成整個 FPGA 驗證流程：
 
-## Quick Start
+1. **FPGA 設置檔案產生** — AI 自動產生環境設定、Makefile、編譯設定檔
+2. **FPGA 設計合成** — HLS 合成與優化（約 1-2 分鐘）
+3. **Bitstream 產生** — 系統整合、佈局佈線（約 2 小時）
+4. **主機端測試程式** — 自動產生 XRT API 整合的測試程式
+5. **自動測試執行** — 在實體 U50 FPGA 上完成硬體驗證
 
-**Demo Video**: [Watch cursor + FPGA verification demo](https://www.youtube.com/watch?v=u_RUluOvOeM) - See the complete workflow in action, or follow the step-by-step guide below.  
-**Execution Log**: [View full synthesis & verification log](https://www.dropbox.com/scl/fi/2zua9qlv7qj0nrdeg7fwz/demo.log?rlkey=wbat8307916fzze0437lvcvtt&e=1&dl=0) - Includes csim, csynth, and U50 hardware verification details.
+**觀看建議**：影片長達 2 小時，你可以選擇有興趣的片段觀看，了解 Cursor 如何回應需求並自動化執行各項工作。
 
-### 1. Prerequisites
+#### 執行日誌說明
+
+日誌檔案包含完整的執行細節：
+
+- **C Simulation (csim)** — 功能驗證結果
+- **C Synthesis (csynth)** — 合成報告、時序分析、資源使用
+- **U50 Hardware Verification** — 實體 FPGA 測試結果與效能數據
+
+---
+
+### 環境需求
+
 ```bash
-# You need:
-- Cursor IDE (https://cursor.com) with SSH extension
-- SSH access to FPGA development server
-- Xilinx Vitis 2022.1+ (or modify for your version)
-- Xilinx U50 FPGA (or adapt for your board)
-- Linux environment with FPGA access
+# 你需要：
+- Cursor IDE (https://cursor.com) 與 SSH 擴充功能
+- SSH 存取 FPGA 開發伺服器
+- Xilinx Vitis 2022.1+（或調整為你的版本）
+- Xilinx U50 FPGA（或適配你的開發板）
+- 具備 FPGA 存取權限的 Linux 環境
 ```
 
-### 2. Setup
+---
 
-#### 2.1 SSH Connection & Cursor Setup
-First, connect to your FPGA development server using Cursor's SSH feature:
+### 操作步驟
+
+#### 1. 連接 FPGA 開發環境
+
+使用 Cursor 的 SSH 功能連接到你的 FPGA 開發伺服器：
 
 ```bash
-# In Cursor IDE:
-1. Press Ctrl+Shift+P
-2. Type "Remote-SSH: Connect to Host"
-3. Configure your SSH connection
-4. Connect to your FPGA server
+# 在 Cursor IDE 中：
+1. 按 Ctrl+Shift+P
+2. 輸入 "Remote-SSH: Connect to Host"
+3. 設定你的 SSH 連線
+4. 連接到 FPGA 伺服器
 ```
 
-For detailed SSH setup with Cursor, find the SSH connection guide in the [cursor doc website](https://docs.cursor.com/en/welcome).
+詳細的 SSH 設定說明請參考 [Cursor 文件](https://docs.cursor.com/en/welcome)。
 
-#### 2.2 Initial Project Structure & HLS Verification
-After cloning, your project directory should look like this:
+---
+
+#### 2. 克隆專案並測試基礎 HLS 流程
+
 ```bash
+# 克隆專案
+git clone https://github.com/aicoforge/cursor-fpga-forge.git
+cd cursor-fpga-forge
+
+# 專案結構：
 cursor-fpga-forge/
-├── adder_kernel.cpp          # Basic HLS kernel
-├── adder_kernel.h            # Kernel header
-├── fpga_verification.md      # Automation specification
-├── run_hls.tcl               # HLS test configuration
-├── tb_add.cpp                # Testbench
-├── vitis_env.sh              # Environment setup
-└── .vscode/                  # Cursor/VSCode configuration
-    └── tasks.json            # Build task configuration
-```
+├── adder_kernel.cpp          # 基礎 HLS kernel
+├── adder_kernel.h            # Kernel 標頭檔
+├── fpga_verification.md      # 自動化規格文件
+├── run_hls.tcl               # HLS 測試設定
+├── tb_add.cpp                # 測試平台
+├── vitis_env.sh              # 環境設定腳本
+└── .vscode/                  # Cursor/VSCode 設定
+    └── tasks.json            # 建置任務設定
 
-First, enable execution and test the basic HLS csim+csynth flow:
-```bash
-# Make environment script executable
+# 啟用執行權限並測試基礎 HLS 流程
 chmod +x vitis_env.sh
 
-# Test basic HLS csim+csynth using Cursor's build task
-# Press Ctrl+Shift+B in Cursor IDE to run HLS verification
-# This will execute: ./vitis_env.sh vitis_hls -f run_hls.tcl
+# 在 Cursor IDE 中按 Ctrl+Shift+B 執行 HLS 驗證
+# 這將執行：./vitis_env.sh vitis_hls -f run_hls.tcl
 ```
 
-#### 2.3 Generate FPGA Verification Scripts
-**This is the key step**: Use Cursor AI with the specification document to generate automation scripts:
+---
+
+#### 3. 使用 AI 自動產生 FPGA 驗證腳本
+
+**關鍵步驟**：讓 Cursor AI 根據規格文件自動產生驗證環境
 
 ```bash
-# In Cursor IDE:
-1. Open this project directory in Cursor
-2. Give this prompt to Cursor AI:
+# 在 Cursor IDE 中：
+1. 開啟此專案目錄
+2. 給 Cursor AI 這個提示：
 
 "please follow fpga_verification.md to build fpga verification needed scripts"
 
-3. Cursor will generate the complete verification framework:
-- setup_verification.sh (environment setup)
-- run_verification.sh (verification execution)
-- fpga_verification/ directory with all source files and Makefiles
+3. Cursor 將自動產生完整的驗證框架：
+   - setup_verification.sh（環境設定）
+   - run_verification.sh（驗證執行）
+   - fpga_verification/ 目錄與所有原始檔案及 Makefile
 ```
 
-#### 2.4 Run Setup
+---
+
+#### 4. 執行設定與驗證
+
 ```bash
-# After Cursor generates the scripts:
+# 賦予執行權限
 chmod +x setup_verification.sh run_verification.sh
+
+# 執行環境設定
 ./setup_verification.sh
 
-# This will create the complete fpga_verification/ directory structure:
+# 產生的目錄結構：
 fpga_verification/
 ├── src/
-│   ├── adder_kernel.cpp       # Kernel with HLS pragmas INSIDE function body
-│   ├── adder_kernel.h         # Kernel header file
-│   └── host.cpp               # Host program with multi-tier memory allocation
+│   ├── adder_kernel.cpp       # 包含 HLS pragmas 的 kernel
+│   ├── adder_kernel.h         # Kernel 標頭檔
+│   └── host.cpp               # 主機端程式（多層記憶體配置）
 ├── kernels/Hardware/
-│   ├── Makefile               # Kernel compilation Makefile
-│   └── adder-compile.cfg      # Kernel compilation configuration
+│   ├── Makefile               # Kernel 編譯 Makefile
+│   └── adder-compile.cfg      # Kernel 編譯設定
 ├── system_hw_link/Hardware/
-│   └── Makefile               # System linking Makefile
+│   └── Makefile               # 系統連結 Makefile
 ├── host/build/
-│   └── Makefile               # Host compilation Makefile
-└── vitis_env.sh               # Environment setup script
-```
+│   └── Makefile               # 主機端編譯 Makefile
+└── vitis_env.sh               # 環境設定腳本
 
-#### 2.5 Verify Setup
-```bash
-# Check that all files were created correctly:
-find fpga_verification -type f | sort
-
-# Verify the directory structure:
-tree fpga_verification
-
-# Test the help function:
-./run_verification.sh help
-```
-
-### 3. Run Verification
-```bash
-# Full FPGA verification (synthesis + implementation + test)
+# 執行完整 FPGA 驗證（合成 + 實作 + 測試）
 ./run_verification.sh all
 
-# Quick software-only verification (for code changes)
+# 或僅執行軟體模擬（快速驗證程式碼修改）
 ./run_verification.sh sw
 ```
 
-## What AI Speeds Up vs. What Takes Time
+---
 
-### What AI Automates (Minutes):
-- **Environment Setup**: Complete verification framework generation
-- **Configuration**: Build files, HLS settings, memory setup - no more trial and error
-- **Error Recovery**: Smart fallbacks when things fail, no manual debugging
-- **Platform Adaptation**: Switch between FPGA platforms and toolkit versions instantly
+### 驗證結果
 
-### What's Still Physics (Hours):
-- **Kernel Compilation**: ~1-2 minutes (HLS synthesis)
-- **Bitstream Generation**: ~2 hours (place & route can't be rushed)
-- **Hardware Testing**: ~5 seconds (actual FPGA execution)
+真實 FPGA 流程與時間數據：
 
-**The Impact**: Instead of spending **weeks** on setup, debugging configs, and fixing pragma errors, you spend **minutes** generating working frameworks and **hours** on actual FPGA compilation. The tedious, error-prone human work disappears.
+1. **Kernel 編譯**（約 1-2 分鐘）
+   - HLS 合成與 pragma 優化
+   - 預估 Fmax：411MHz（簡單加法器）
 
-### Complete Verification Results
+2. **Bitstream 產生**（約 2 小時）
+   - 系統整合與平台連結
+   - 區塊級合成：111 個平行工作
+   - 邏輯佈局與佈線優化
+   - 最終 bitstream 大小：約 30MB
 
-Real FPGA flow with actual timing data:
+3. **主機端編譯**（約 30 秒）
+   - XRT API 整合與錯誤處理
+   - 多層記憶體配置降級機制
 
-1. **Kernel Compilation** (~1-2 minutes)
-   - HLS synthesis with pragma optimization
-   - Estimated Fmax: 411MHz for simple adder
+4. **硬體驗證**（約 5 秒）
+   - 在實體 U50 FPGA 上執行
+   - **記憶體配置**：自動降級至 HBM Bank 0
+   - **測試案例**：4 種不同場景 ✓ 全部通過
 
-2. **Bitstream Generation** (~2 hours)
-   - System integration and platform linking  
-   - Block-level synthesis: 111 parallel jobs
-   - Logic placement and routing optimization
-   - Final bitstream size: ~30MB
+---
 
-3. **Host Compilation** (~30 seconds)
-   - XRT API integration with error handling
-   - Multi-tier memory allocation fallback
+## 環境客製化
 
-4. **Hardware Verification** (~5 seconds)
-   - Real FPGA execution on U50
-   - **Memory allocation**: Falls back to HBM Bank 0
-   - **Test Cases**: 4 different scenarios ✓ ALL PASSED
+你可以根據實際需求調整環境設定：
 
-## Environment Customization
+### 不同的 Vitis 版本？
 
-You can customize the environment in two ways: 
-1. **Before generation**: Modify the template specifications in `fpga_verification.md` before asking Cursor AI to generate scripts
-2. **After generation**: Edit the generated scripts directly
-
-### Different Vitis Version?
 ```bash
-# Option 1: Edit fpga_verification.md before generation
-# Find Section 1 and change:
-VITIS_VERSION="2023.2"  # Change from 2022.1
+# 方法 1：產生前修改 fpga_verification.md
+# 找到 Section 1 並修改：
+VITIS_VERSION="2023.2"  # 從 2022.1 改為 2023.2
 VITIS_PATH="/opt/Xilinx/Vitis/${VITIS_VERSION}"
 
-# Option 2: Edit generated files after creation
-# In setup_verification.sh and vitis_env.sh
-VITIS_VERSION="2023.2"  # Change from 2022.1
+# 方法 2：產生後直接編輯腳本
+# 在 setup_verification.sh 和 vitis_env.sh 中修改
+VITIS_VERSION="2023.2"
 VITIS_PATH="/opt/Xilinx/Vitis/2023.2"
 ```
 
-### Different FPGA Platform?
+### 不同的 FPGA 平台？
+
 ```bash
-# Option 1: Edit fpga_verification.md specification 
-# Find Section 1 and change:
+# 方法 1：修改 fpga_verification.md 規格
+# 找到 Section 1 並修改：
 DEFAULT_PLATFORM="xilinx_u250_gen3x16_xdma_4_1_202210_1"
 
-# Option 2: Set environment variable before running
+# 方法 2：執行前設定環境變數
 export FPGA_PLATFORM="xilinx_u250_gen3x16_xdma_4_1_202210_1"
 ./setup_verification.sh
 ```
 
-### Different Installation Paths?
+### 不同的安裝路徑？
+
 ```bash
-# Option 1: Modify paths in fpga_verification.md Section 1
-XRT_PATH="/opt/xilinx/xrt"                    # Change to your XRT path
-VITIS_PATH="/opt/Xilinx/Vitis/2022.1"         # Change to your Vitis path
+# 修改 fpga_verification.md Section 1 中的路徑
+XRT_PATH="/opt/xilinx/xrt"                    # 改為你的 XRT 路徑
+VITIS_PATH="/opt/Xilinx/Vitis/2022.1"         # 改為你的 Vitis 路徑
 
-# Common alternative paths:
-XRT_PATH="/tools/Xilinx/xrt"                  # Alternative XRT location
-VITIS_PATH="/tools/Xilinx/Vitis/2023.1"       # Different version/location
-
-# Option 2: Customize in generated setup_verification.sh
-XRT_PATH="/home/user/xilinx/xrt"              # Custom user installation
-VITIS_PATH="/home/user/xilinx/Vitis/2022.2"   # Custom user installation
+# 常見替代路徑：
+XRT_PATH="/tools/Xilinx/xrt"                  # 替代 XRT 位置
+VITIS_PATH="/tools/Xilinx/Vitis/2023.1"       # 不同版本/位置
 ```
-
-## Technology Stack
-
-**AI Tools**:
-- Cursor IDE (AI code editor) or similar AI assistants
-- Public LLMs like OpenAI and Claude
-- Private LLM services (for enterprise security needs)
-- Automated error diagnosis and fixes
-
-**FPGA Platform**:
-- Xilinx Alveo U50/U250/U280 and AIE series
-- Vitis HLS 2022.1+
-- Custom FPGA platform support
-- Cross-platform compatibility
-
-## Roadmap & Future Development
-
-Based on this automated verification foundation, we're building towards comprehensive design and verification automation:
-
-**Near-term Extensions**:
-- **Intelligent Error Diagnosis**: AI analyzes error messages and suggests fixes automatically
-- **Performance Optimization**: AI recommends HLS pragma optimizations and resource allocation
-- **Interactive Debugging**: AI-assisted waveform analysis and debugging guidance
-- **Design Template Generation**: AI creates optimized design structures from specifications
-
-**Long-term Vision**:
-- **Multi-kernel System Design**: Complex FPGA systems with AI-generated interconnects
-- **Advanced Waveform Analysis**: AI analyzes simulation traces and identifies issues
-- **Cross-Platform Generation**: Support for Intel FPGAs, different vendors, and custom boards
-- **Real-time Collaboration**: Team-based FPGA development with AI assistance
-- **Full Lifecycle Automation**: From concept to optimized, verified hardware implementation
-
-## Why This Matters
-
-Most FPGA engineers spend about 70% of their time on verification and debugging instead of real innovation. Our mission is to make FPGA development as fast and easy as software development, with AI handling the tedious work so engineers can focus on breakthroughs. The result:
-
-- **Faster Time-to-Market**: Reduce development cycles from months to weeks
-- **Lower Barriers**: Make FPGA technology accessible to more developers
-- **More Innovation**: Free engineers to focus on solving real problems
-- **Better Quality**: Automated frameworks reduce human error
-
-## Contributing & Services
-
-### Commercial Services
-
-We offer **AI Agent + FPGA Auto Design & Verification services** through [aicoforge.com](https://aicoforge.com), where clients can choose different AI agents and FPGA platforms based on their specific requirements. This GitHub project demonstrates our capabilities using Cursor and Xilinx U50 as an example implementation.
-
-**Our Services Include**:
-- Multi-core system verification
-- Custom IP integration and testing
-- Performance optimization and debugging
-- Platform-specific adaptation (Intel FPGA, custom boards)
-- Enterprise deployment and training
-- Private LLM deployment (for security and compliance needs)
-
-For commercial projects, contact us through [aicoforge.com](https://aicoforge.com).
-
-### Open Source Contributions
-
-**This is our first open-source project as we build AICOFORGE!** We welcome:
-- Bug reports and feature requests
-- Platform support (Intel FPGAs, different boards)
-- Integration with other AI tools and workflows
-- Documentation improvements
-- Sharing your success stories
-
-Join us in making FPGA development accessible to everyone!
-
-## Connect With Us
-
-- **Website**: [aicoforge.com](https://aicoforge.com) - Building the future of FPGA development
-- **Vision**: AI Agent + FPGA Auto Design & Verification - AI that understands hardware
-- **Mission**: Turning FPGA complexity into simplicity, one automated workflow at a time
-- **Contact**: kevinjan@aicoforge.com
 
 ---
 
-## License
+## AI 加速什麼 vs 什麼需要時間
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+### AI 自動化的部分（數分鐘）：
+- **環境設定**：完整驗證框架產生
+- **設定檔配置**：建置檔案、HLS 設定、記憶體配置 — 無需試錯
+- **錯誤恢復**：智能降級機制，無需手動除錯
+- **平台適配**：快速切換 FPGA 平台與工具版本
 
-## Acknowledgments
+### 仍需時間的部分（物理限制）：
+- **Kernel 編譯**：約 1-2 分鐘（HLS 合成）
+- **Bitstream 產生**：約 2 小時（佈局佈線無法加速）
+- **硬體測試**：約 5 秒（實體 FPGA 執行）
 
-Built with the AICOFORGE team. As a Xilinx certified partner, we're dedicated to pushing the boundaries of FPGA development and making it accessible to all engineers.
+**影響**：從原本需要**數週**的設定、除錯、修正 pragma 錯誤，縮短至**數分鐘**產生可運作的框架，加上**數小時**的實際 FPGA 編譯。繁瑣易錯的人工作業完全消失。
+
+---
+
+## 體驗預建的 AI 代理 + FPGA 開發環境
+
+如果你對這個透過 AI 代理自動化 FPGA 驗證的範例有興趣，但沒有能力複製類似環境，歡迎聯繫我們：
+
+**聯絡方式**：kevinjan@aicoforge.com
+
+我們可以提供一個**預先建置好的 AI 代理 + FPGA 開發環境**，讓你實際體會 AI 代理如何自動化 FPGA 驗證的完整操作流程。
+
+---
+
+## 相關連結
+
+- **AICOFORGE 官網**：[aicoforge.com](https://aicoforge.com)
+- **HLS 優化專案**：[cursor-hls-forge](https://github.com/aicoforge/cursor-hls-forge)
+- **Demo 影片播放清單**：[YouTube Channel](https://www.youtube.com/@aicoforge)
+
+---
+
+## 授權條款
+
+MIT License
+
+---
+
+## 關於 AICOFORGE
+
+AICOFORGE 是一個 AI 代理 + FPGA 自動設計驗證平台，致力於讓硬體開發像軟體一樣敏捷。我們與台灣大學電機系賴瑾教授（前威盛電子 CTO 暨創辦人）共同研發 LLM2HLS 理論技術，結合學術創新與產業實戰經驗。
+
+**商業合作**：kevinjan@aicoforge.com
