@@ -88,7 +88,7 @@
 
 ---
 
-#### 2. 克隆專案並測試基礎 HLS 流程
+#### 2. 克隆專案
 
 ```bash
 # 克隆專案
@@ -106,7 +106,7 @@ cursor-fpga-forge/
 └── .vscode/                  # Cursor/VSCode 設定
     └── tasks.json            # 建置任務設定
 
-# 啟用執行權限並測試基礎 HLS 流程
+# 啟用執行權限並測試
 chmod +x vitis_env.sh
 
 # 在 Cursor IDE 中按 Ctrl+Shift+B 執行 HLS 驗證
