@@ -88,7 +88,7 @@ For detailed SSH setup, refer to [Cursor documentation](https://docs.cursor.com/
 
 ---
 
-#### 2. Clone Project and Test Basic HLS Flow
+#### 2. Clone Project
 
 ```bash
 # Clone the project
@@ -106,7 +106,7 @@ cursor-fpga-forge/
 └── .vscode/                  # Cursor/VSCode configuration
     └── tasks.json            # Build task configuration
 
-# Enable execution and test basic HLS flow
+# Enable execution and test
 chmod +x vitis_env.sh
 
 # Press Ctrl+Shift+B in Cursor IDE to run HLS verification
@@ -283,3 +283,4 @@ AICOFORGE is an AI Agent + FPGA Auto Design & Verification platform dedicated to
 
 
 **Business Inquiries**: kevinjan@aicoforge.com
+
